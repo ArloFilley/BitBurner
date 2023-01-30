@@ -19,11 +19,11 @@ export async function main(ns) {
 
 		if (!nuke) return;
 
-		if (ssh)  ns.brutessh(target), currentports=-1;
-		if (ftp)  ns.ftpcrack(target),currentports=-1;
-		if (smtp) ns.relaysmtp(target),currentports=-1;
-		if (http) ns.httpworm(target),currentports=-1;
-		if (sql)  ns.sqlinject(target),currentports=-1;
+		if (ssh)  ns.brutessh(target), currentports=currentports - 1;
+		if (ftp)  ns.ftpcrack(target),currentports=currentports - 1;
+		if (smtp) ns.relaysmtp(target),currentports=currentports - 1;
+		if (http) ns.httpworm(target),currentports=currentports - 1;
+		if (sql)  ns.sqlinject(target),currentports= currentports - 1;
 
 		if(currentports<=0) ns.nuke(target), ns.tprint("Nuked "+target);
 	});
