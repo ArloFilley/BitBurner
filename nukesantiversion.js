@@ -1,6 +1,8 @@
+import * as lib from "lib.js"
+
 /** @param {NS} ns */
 export async function main(ns) {
-	let targets = JSON.parse(ns.read("nuketargets.txt"));
+	let targets = lib.readFile("nuketargets.js");
 
 	let hackingLevel = await ns.getHackingLevel();
 	let nuke = await ns.fileExists("NUKE.exe");
@@ -14,17 +16,18 @@ export async function main(ns) {
 		if (! (hackingLevel >= ns.getServerRequiredHackingLevel(target))) {
 			return;
 		}
+		
 		let ports = ns.getServerNumPortsRequired(target)
 		let currentports = ports
 
 		if (!nuke) return;
 
-		if (ssh)  ns.brutessh(target), currentports=-1;
-		if (ftp)  ns.ftpcrack(target),currentports=-1;
-		if (smtp) ns.relaysmtp(target),currentports=-1;
-		if (http) ns.httpworm(target),currentports=-1;
-		if (sql)  ns.sqlinject(target),currentports=-1;
+		if (ssh)  ns.brutessh(target), 	currentports--;
+		if (ftp)  ns.ftpcrack(target),	currentports--;
+		if (smtp) ns.relaysmtp(target),	currentports--;
+		if (http) ns.httpworm(target),	currentports--;
+		if (sql)  ns.sqlinject(target),	currentports--;
 
-		if(currentports<=0) ns.nuke(target), ns.tprint("Nuked "+target);
+		if(currentports<=0 && nuke) ns.nuke(target); ns.tprint("Nuked "+target);
 	});
 }

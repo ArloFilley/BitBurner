@@ -7,7 +7,8 @@ export async function main(ns) {
 			"hacktargets.js", 
 			"filetransfer.js", "hacks.js", 
 			"buyservers.js", "killall.js", 
-			"hack.js", "grow.js", "weaken.js"
+			"hack.js", "grow.js", "weaken.js",
+			"lib.js"
 		],
 
 		refresh_time: parseInt(await ns.prompt(
@@ -27,10 +28,16 @@ export async function main(ns) {
 			{ type: "text" }
 		)),
 
+		wget_url: "https://github.com/ArloFilley/BitBurner/",
+
 		multiplier: 60,
 
 		date: new Date(),
+
+		reset: ns.args[1] === "--reset"
 	}
+
+	await ns.write("config.txt", JSON.stringify(CONFIG));
 
 	if (CONFIG.money_output === "$/H") CONFIG.multiplier = 360;
 
@@ -39,7 +46,7 @@ export async function main(ns) {
 	const start = Date.now();
 	ns.tprint(CONFIG)
 	while (true) {
-		await doSomething(ns, CONFIG.files);
+		await doSomething(ns, CONFIG);``
 		time = 0;
 		while (time < CONFIG.refresh_time * 60_000) {
 			CONFIG.date = new Date();
@@ -57,11 +64,12 @@ export async function main(ns) {
 	}
 }
 
-async function doSomething(ns, FILES) {
+async function doSomething(ns, config) {
 	// Finds all possible Nuke targets and attempts to nuke them
+	const FILES = config.files;
 	for (let i in FILES) {
 		let file = FILES[i];
-		await getFile(file, ns);
+		await getFile(file, config.url ,ns);
 	}
 
 	await ns.run("killall.js");
@@ -82,6 +90,6 @@ async function doSomething(ns, FILES) {
 	ns.toast("HACKED SERVERS");
 }
 
-async function getFile(filename, ns) {
-	if (! ns.fileExists(filename)) await ns.wget(`http://arlofilley.com/BitBurner/${filename}`, filename)
+async function getFile(filename, url, ns) {
+	if (! ns.fileExists(filename)) await ns.wget(`${url}${filename}`, filename)
 }
