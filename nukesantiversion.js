@@ -22,11 +22,11 @@ export async function main(ns) {
 
 		if (!nuke) return;
 
-		if (ssh)  ns.brutessh(target), 	currentports--;
-		if (ftp)  ns.ftpcrack(target),	currentports--;
-		if (smtp) ns.relaysmtp(target),	currentports--;
-		if (http) ns.httpworm(target),	currentports--;
-		if (sql)  ns.sqlinject(target),	currentports--;
+		if (ssh)  ns.brutessh(target), currentports=currentports - 1;
+		if (ftp)  ns.ftpcrack(target),currentports=currentports - 1;
+		if (smtp) ns.relaysmtp(target),currentports=currentports - 1;
+		if (http) ns.httpworm(target),currentports=currentports - 1;
+		if (sql)  ns.sqlinject(target),currentports= currentports - 1;
 
 		if(currentports<=0 && nuke) ns.nuke(target); ns.tprint("Nuked "+target);
 	});
