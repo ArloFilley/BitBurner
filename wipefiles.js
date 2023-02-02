@@ -1,6 +1,8 @@
+import * as lib from "lib.js";
+
 /** @param {NS} ns */
 export async function main(ns) {
-    let config = await JSON.parse(ns.read("config.txt"));
+    let config = lib.read("config.txt");
 
     const files = config.files
     let file;
