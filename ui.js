@@ -20,8 +20,7 @@ function numFormat(number){
 	} else if (number >= 999_999_999){
 		number /= 1_000_000_000
 		return `${number.toFixed(1)}B`
-	}
-	else if (number < 1_000){
+	} else {
 		return `${number.toFixed(1)}`
 	}
 }

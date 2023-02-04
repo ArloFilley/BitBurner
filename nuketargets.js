@@ -12,13 +12,9 @@ export async function main(ns) {
 		});
 	};
 
-	ns.tprint(targets);
-
 	targets = targets.filter( (target) => {
 		return ! (ns.hasRootAccess(target));
 	});
-
-	ns.tprint(targets);
 
 	targets = targets.filter( (target) => {
 		return ! (servers.includes(target));
