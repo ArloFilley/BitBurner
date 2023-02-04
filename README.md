@@ -8,13 +8,13 @@ A collection of scripts for the game BitBurner
 4. hacking server detection
 5. auto-hacking with target prioritisation
 6. Easy configuration
+7. Configuration Saving
 
 ## WIP
 1. hacknet node setup
 2. better GUI
 3. more configuration options
-4. configuration saving
-5. autocompletion
+4. autocompletion
 
 ## Future
 1. late game features
