@@ -42,6 +42,10 @@ export async function main(ns) {
 		return 0;
 	});
 
+	servers = servers.filter( (server) => {
+		return server !== "home";
+	});
+
 	await ns.rm("hacktargets.txt");
 	await ns.write("hacktargets.txt", JSON.stringify(targets));
 	await ns.rm("hackservers.txt");
