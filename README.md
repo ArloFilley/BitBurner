@@ -21,7 +21,7 @@ A collection of scripts for the game BitBurner
 
 # Installation
 ```
-wget https://github.com/ArloFilley/BitBurner/install.js install.js
+wget https://raw.githubusercontent.com/ArloFilley/BitBurner/master/install.js install.js
 ```
 ```
 run install.js
