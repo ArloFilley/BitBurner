@@ -2,7 +2,7 @@ import * as lib from "lib.js";
 
 /** @param {NS} ns */
 export async function main(ns) {
-    let config = lib.readFile("config.txt", ns);
+    let config = await lib.readFile("config.txt", ns);
 
     const files = config.files
     let file;

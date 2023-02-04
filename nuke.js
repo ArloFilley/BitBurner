@@ -2,7 +2,7 @@ import * as lib from "lib.js"
 
 /** @param {NS} ns */
 export async function main(ns) {
-	let targets = lib.readFile("nuketargets.js", ns);
+	let targets = await lib.readFile("nuketargets.js", ns);
 
 	let hackingLevel = await ns.getHackingLevel();
 	let nuke = await ns.fileExists("NUKE.exe");
