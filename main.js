@@ -1,8 +1,10 @@
+import * as lib from "lib.js";
+
 /** @param {NS} ns */
 export async function main(ns) {
 	let CONFIG;
 	if (await ns.fileExists("config.txt") && await ns.prompt("Load Saved Configuration?")) {
-		CONFIG = await JSON.parse(ns.read("config.txt"));
+		CONFIG = await lib.readFile("config.txt", ns);
 	} else {
 		// [OPTIONS]
 		CONFIG = {
@@ -12,7 +14,7 @@ export async function main(ns) {
 				"filetransfer.js", "hacks.js", 
 				"buyservers.js", "killall.js", 
 				"hack.js", "grow.js", "weaken.js",
-				"lib.js"
+				"lib.js", "wipefiles.js"
 			],
 
 			refresh_time: parseInt(await ns.prompt(
