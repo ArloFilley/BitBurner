@@ -1,7 +1,7 @@
-export async function draw(ns, date) {
+export async function draw(ns, CONFIG, start) {
     ns.ui.clearTerminal();
 	ns.tprint(`
-Current Time    : ${date.toLocaleTimeString()}
+Current Time    : ${CONFIG, date.toLocaleTimeString()}
 Current Uptime  : ${Math.floor((Date.now() - start) / 1000)}S
 Current Earnings: ${numFormat(ns.getTotalScriptIncome()[0] * CONFIG.multiplier)}${CONFIG.money_output}
 Overall Earining: ${numFormat(ns.getTotalScriptIncome()[1] * CONFIG.multiplier)}${CONFIG.money_output}
