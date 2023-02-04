@@ -1,42 +1,46 @@
 /** @param {NS} ns */
 export async function main(ns) {
-	// [OPTIONS]
-	let CONFIG = {
-		files: [
-			"nuketargets.js", "nuke.js", 
-			"hacktargets.js", 
-			"filetransfer.js", "hacks.js", 
-			"buyservers.js", "killall.js", 
-			"hack.js", "grow.js", "weaken.js",
-			"lib.js"
-		],
+	let CONFIG;
+	if (await ns.fileExists("config.txt") && await ns.prompt("Load Saved Configuration?")) {
+		CONFIG = await JSON.parse(ns.read("config.txt"));
+	} else {
+		// [OPTIONS]
+		CONFIG = {
+			files: [
+				"nuketargets.js", "nuke.js", 
+				"hacktargets.js", 
+				"filetransfer.js", "hacks.js", 
+				"buyservers.js", "killall.js", 
+				"hack.js", "grow.js", "weaken.js",
+				"lib.js"
+			],
 
-		refresh_time: parseInt(await ns.prompt(
-			"Please Enter The amount of time to refresh in Minutes", 
-			{ type: "text"} 
-		)),
+			refresh_time: parseInt(await ns.prompt(
+				"Please Enter The amount of time to refresh in Minutes\nRecommended 15 mins", 
+				{ type: "text"} 
+			)),
 
-		money_output: await ns.prompt(
-			"What Output Would You Like To See From The Script?",{ 
-				type: "select", 
-				choices: ["$/M", "$/H"]
-			}
-		),
+			money_output: await ns.prompt(
+				"What Output Would You Like To See From The Script?",{ 
+					type: "select", 
+					choices: ["$/M", "$/H"]
+				}
+			),
 
-		hz: parseInt(await ns.prompt(
-			"please Enter The Amount of time to update UI\nin ms\nRecommended: 100",
-			{ type: "text" }
-		)),
+			hz: parseInt(await ns.prompt(
+				"please Enter The Amount of time to update UI\nin ms\nRecommended: 100",
+				{ type: "text" }
+			)),
 
-		wget_url: "https://raw.githubusercontent.com/ArloFilley/BitBurner/master/",
+			wget_url: "https://raw.githubusercontent.com/ArloFilley/BitBurner/master/",
 
-		multiplier: 60,
+			multiplier: 60,
 
-		date: new Date(),
-
-		reset: ns.args[1] === "--reset"
+			date: new Date(),
+		}
 	}
 
+	if (await ns.fileExists("config.txt")) await ns.rm("config.txt");
 	await ns.write("config.txt", JSON.stringify(CONFIG));
 
 	if (CONFIG.money_output === "$/H") CONFIG.multiplier = 360;
