@@ -21,4 +21,7 @@ function numFormat(number){
 		number /= 1_000_000_000
 		return `${number.toFixed(1)}B`
 	}
+	else if (number < 1_000){
+		return `${number.toFixed(1)}`
+	}
 }
