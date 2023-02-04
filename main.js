@@ -89,6 +89,7 @@ async function hackTargets(ns, config) {
 
 	await ns.run("hacktargets.js");
 	await ns.run("filetransfer.js");
+	await ns.run("hacks.js");
 
 	ns.toast("HACKED SERVERS");
 }
