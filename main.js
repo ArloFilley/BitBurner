@@ -28,7 +28,7 @@ export async function main(ns) {
 			{ type: "text" }
 		)),
 
-		wget_url: "https://github.com/ArloFilley/BitBurner/",
+		wget_url: "https://raw.githubusercontent.com/ArloFilley/BitBurner/master/",
 
 		multiplier: 60,
 
@@ -69,7 +69,7 @@ async function doSomething(ns, config) {
 	const FILES = config.files;
 	for (let i in FILES) {
 		let file = FILES[i];
-		await getFile(file, config.url ,ns);
+		await getFile(file, config.wget_url ,ns);
 	}
 
 	await ns.run("killall.js");
