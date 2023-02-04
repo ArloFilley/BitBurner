@@ -4,9 +4,9 @@ export async function main(ns) {
 	const AVAILABLEMONEY = ns.getServerMoneyAvailable("home") * AVAILABLEMONEYRATIO;
 	const MAXRAM = ns.getPurchasedServerMaxRam();
 
-	const MINRAM = 15.9;
+	const MINRAM = 16;
 
-	for (let i = MAXRAM; i > MINRAM; i = i / 2) {
+	for (let i = MAXRAM; i >= MINRAM; i = i / 2) {
 		if (ns.getPurchasedServerCost(i) <= AVAILABLEMONEY) {
 			ns.purchaseServer("hacker", i);
 			i = 0;

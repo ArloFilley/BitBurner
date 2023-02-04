@@ -1,4 +1,5 @@
-import * as lib from "lib.js";
+import * as lib from "/lib/lib.js";
+import * as ui 	from "/lib/ui.js";
 
 /** @param {NS} ns */
 export async function main(ns) {
@@ -55,21 +56,12 @@ export async function main(ns) {
 	let time;
 	const start = Date.now();
 	while (true) {
-		await doSomething(ns, CONFIG);``
+		await hackTargets(ns, CONFIG);
 		time = 0;
 		while (time < CONFIG.refresh_time * 60_000) {
-			
-			if (!CONFIG.verbose){
+			CONFIG.date = new Date();
 
-				CONFIG.date = new Date();
-				ns.ui.clearTerminal();
-				ns.tprint(`Current Time    : ${CONFIG.date.toLocaleTimeString()}`)
-				ns.tprint(`Current Uptime  : ${Math.floor((Date.now() - start) / 1000)}S`);
-				ns.tprint(`Current Earnings: ${lib.NumFormat(ns.getTotalScriptIncome()[0] * CONFIG.multiplier)}${CONFIG.money_output}`);
-				ns.tprint(`Overall Earining: ${lib.NumFormat(ns.getTotalScriptIncome()[1] * CONFIG.multiplier)}${CONFIG.money_output}`);
-				ns.tprint("");
-				ns.tprint(`Hacking Servers : ${ns.getPurchasedServers().length}`);
-			}
+			if (! CONFIG.verbose) ui.draw(ns);
 			
 			time += CONFIG.hz;
 			await ns.sleep(CONFIG.hz);
@@ -77,12 +69,12 @@ export async function main(ns) {
 	}
 }
 
-async function doSomething(ns, config) {
+async function hackTargets(ns, config) {
 	// Finds all possible Nuke targets and attempts to nuke them
 	const FILES = config.files;
 	for (let i in FILES) {
 		let file = FILES[i];
-		await getFile(file, config.wget_url ,ns);
+		await lib.getFile(file, config.wget_url, ns);
 	}
 
 	await ns.run("killall.js");
@@ -98,10 +90,5 @@ async function doSomething(ns, config) {
 	await ns.run("hacktargets.js");
 	await ns.run("filetransfer.js");
 
-	await ns.run("hacks.js");
 	ns.toast("HACKED SERVERS");
-}
-
-async function getFile(filename, url, ns) {
-	if (! ns.fileExists(filename)) await ns.wget(`${url}${filename}`, filename)
 }

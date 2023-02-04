@@ -1,4 +1,4 @@
-import * as lib from "lib.js"
+import * as lib from "/lib/lib.js"
 
 /** @param {NS} ns */
 export async function main(ns) {
