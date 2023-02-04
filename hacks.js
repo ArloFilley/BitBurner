@@ -2,8 +2,8 @@ import * as lib from "/lib/lib.js";
 
 /** @param {NS} ns */
 export async function main(ns) {
-	const targets = await lib.readFile("hacktargets.txt");
-	const servers = await lib.readFile("hackservers.txt");
+	const targets = await lib.readFile("hacktargets.txt", ns);
+	const servers = await lib.readFile("hackservers.txt", ns);
 
 	const hackRam = ns.getScriptRam("hack.js");
 	const growRam = ns.getScriptRam("grow.js");
