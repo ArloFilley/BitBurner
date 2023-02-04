@@ -14,7 +14,6 @@ export async function main(ns) {
 				"filetransfer.js", "hacks.js", 
 				"buyservers.js", "killall.js", 
 				"hack.js", "grow.js", "weaken.js",
-				"lib.js", "wipefiles.js"
 			],
 
 			refresh_time: parseInt(await ns.prompt(

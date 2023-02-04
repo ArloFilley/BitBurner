@@ -1,5 +1,3 @@
-import * as lib from "lib.js";
-
 /** @param {NS} ns */
 export async function main(ns) {
     const files = [
@@ -12,10 +10,10 @@ export async function main(ns) {
         "config.txt", "hackservers.txt", 
         "hacktargets.txt", "nuketargets.txt"
     ];
-    
+
     let file;
     for (let i in files) {
-        file = config.files[i];
+        file = files[i];
         await ns.rm(file);
     }
 }
