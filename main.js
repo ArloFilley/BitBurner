@@ -33,6 +33,11 @@ export async function main(ns) {
 				{ type: "text" }
 			)),
 
+			verbose: await ns.prompt(
+				"Run in verbose config?"
+				
+			),
+
 			wget_url: "https://raw.githubusercontent.com/ArloFilley/BitBurner/master/",
 
 			multiplier: 60,
@@ -49,19 +54,22 @@ export async function main(ns) {
 	// [MAIN LOOP]
 	let time;
 	const start = Date.now();
-	ns.tprint(CONFIG)
 	while (true) {
 		await doSomething(ns, CONFIG);``
 		time = 0;
 		while (time < CONFIG.refresh_time * 60_000) {
-			CONFIG.date = new Date();
-			ns.ui.clearTerminal();
-			ns.tprint(`Current Time    : ${CONFIG.date.toLocaleTimeString()}`)
-			ns.tprint(`Current Uptime  : ${Math.floor((Date.now() - start) / 1000)}S`);
-			ns.tprint(`Current Earnings: ${Math.round(ns.getTotalScriptIncome()[0] * CONFIG.multiplier / 1000)}K${CONFIG.money_output}`);
-			ns.tprint(`Overall Earining: ${Math.round(ns.getTotalScriptIncome()[1] * CONFIG.multiplier / 1000)}K${CONFIG.money_output}`);
-			ns.tprint("");
-			ns.tprint(`Hacking Servers : ${ns.getPurchasedServers().length}`);
+			
+			if (!CONFIG.verbose){
+
+				CONFIG.date = new Date();
+				ns.ui.clearTerminal();
+				ns.tprint(`Current Time    : ${CONFIG.date.toLocaleTimeString()}`)
+				ns.tprint(`Current Uptime  : ${Math.floor((Date.now() - start) / 1000)}S`);
+				ns.tprint(`Current Earnings: ${Math.round(ns.getTotalScriptIncome()[0] * CONFIG.multiplier / 1000)}K${CONFIG.money_output}`);
+				ns.tprint(`Overall Earining: ${Math.round(ns.getTotalScriptIncome()[1] * CONFIG.multiplier / 1000)}K${CONFIG.money_output}`);
+				ns.tprint("");
+				ns.tprint(`Hacking Servers : ${ns.getPurchasedServers().length}`);
+			}
 			
 			time += CONFIG.hz;
 			await ns.sleep(CONFIG.hz);
@@ -88,7 +96,6 @@ async function doSomething(ns, config) {
 	ns.toast("Brought More Servers");
 
 	await ns.run("hacktargets.js");
-	await ns.run("hackservers.js");
 	await ns.run("filetransfer.js");
 
 	await ns.run("hacks.js");
