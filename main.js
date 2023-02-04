@@ -61,7 +61,7 @@ export async function main(ns) {
 		while (time < CONFIG.refresh_time * 60_000) {
 			CONFIG.date = new Date();
 
-			if (! CONFIG.verbose) ui.draw(ns);
+			if (! CONFIG.verbose) ui.draw(ns, CONFIG.date);
 			
 			time += CONFIG.hz;
 			await ns.sleep(CONFIG.hz);
