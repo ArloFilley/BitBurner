@@ -65,8 +65,8 @@ export async function main(ns) {
 				ns.ui.clearTerminal();
 				ns.tprint(`Current Time    : ${CONFIG.date.toLocaleTimeString()}`)
 				ns.tprint(`Current Uptime  : ${Math.floor((Date.now() - start) / 1000)}S`);
-				ns.tprint(`Current Earnings: ${Math.round(ns.getTotalScriptIncome()[0] * CONFIG.multiplier / 1000)}K${CONFIG.money_output}`);
-				ns.tprint(`Overall Earining: ${Math.round(ns.getTotalScriptIncome()[1] * CONFIG.multiplier / 1000)}K${CONFIG.money_output}`);
+				ns.tprint(`Current Earnings: ${lib.NumFormat(ns.getTotalScriptIncome()[0] * CONFIG.multiplier)}${CONFIG.money_output}`);
+				ns.tprint(`Overall Earining: ${lib.NumFormat(ns.getTotalScriptIncome()[1] * CONFIG.multiplier)}${CONFIG.money_output}`);
 				ns.tprint("");
 				ns.tprint(`Hacking Servers : ${ns.getPurchasedServers().length}`);
 			}
